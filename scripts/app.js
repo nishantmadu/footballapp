@@ -15,18 +15,18 @@ angularApp.config(function ($routeProvider) {
   })
 
 
-// .when ('/leaguedetails/:uniqId', {
-//   templateUrl: 'pages/details.html',
-//   controller: 'PointsController',
-//   controllerAs: 'pc'
-// })
+.when ('/teamdetails/:uniqId', {
+  templateUrl: 'pages/teams.html',
+  controller: 'TeamsController',
+  controllerAs: 'tc'
+})
 //
 });
 
 
 
 angularApp.config(['$httpProvider', function ($httpProvider) {
-   $httpProvider.defaults.headers.common['X-Auth-Token'] = 'e03b9e6e71734ae38c076a13eac738ea';
+   $httpProvider.defaults.headers.common['X-Auth-Token'] = 'af86c338f9014ef3bae9c0d3e246961a';
 }]);
 
 
@@ -68,13 +68,13 @@ angularApp.controller("DetailsController",['$filter','$routeParams','FootballSer
   }]);
 
 
-//     angularApp.controller("PointsController",['$resource','$filter','$routeParams',
-//     function($resource,$filter,$routeParams){
-//       var vm=this;
-//         var footballResource = $resource('http://api.football-data.org/v1/soccerseasons/');
-//         vm.footballResponse = footballResource.query();
-//
-// }]);
+    angularApp.controller("TeamsController",['$resource','$filter','$routeParams',function($resource,$filter,$routeParams){
+      var id = $routeParams.uniqId;
+      vm.teamsResponse = FootballService.getTeamdetails(id);
+
+
+
+}]);
 
 
 
@@ -93,5 +93,10 @@ angularApp.service('FootballService', function($resource) {
       return vm.pointsResponse;
     }
 
+    vm.getTeamdetails = function(id) {
+      var teamDetails = $resource();
+      vm.teamsResponse = footballDetails.get();
+      return vm.teamsResponse;
+    }
 
 });
