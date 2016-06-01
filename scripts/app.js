@@ -88,8 +88,8 @@ angularApp.service('FootballService', function($resource) {
     }
 
     vm.getPoints = function(id) {
-      var footballDetails = $resource('http://api.football-data.org/v1/soccerseasons/' + id + '/fixtures');
-      vm.pointsResponse = footballDetails.query();
+      var footballDetails = $resource('http://api.football-data.org/v1/soccerseasons/' + id + '/leagueTable');
+      vm.pointsResponse = footballDetails.get();
       return vm.pointsResponse;
     }
 

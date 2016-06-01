@@ -25,18 +25,28 @@
 
 <li class="active"><a href="#">Points Table</a>
   <div class ="row">
-    <div class="col-md-6 col-md-offset-3" id="result">
+    <div class="col-md-8 col-md-offset-3" id="result">
       <table class="table table-striped table-hover ">
           <thead>
             <tr>
+              <th><center>Position</center></th>
               <th><center>Teams</center></th>
+              <th><center></center></th>
+              <th><center>Wins</center></th>
+              <th><center>Loss</center></th>
+              <th><center>Goals</center></th>
+              <th><center>Points</center></th>
             </tr>
           </thead>
           <tbody>
-          <tr ng-repeat = "p in dc.pointsResponse">
-            <td><center><a href="#/leaguedetails/{{n.id}}" ng-click="" >{{p.caption}}</a></center></td>
-            <td><center><a href="#/leaguedetails/:uniqId" ng-click="" >{{p.numberOfTeams}}</a></center></td>
-            <td><center><a href="#/leaguedetails/:uniqId" ng-click="" >{{p.numberOfGames}}</a></center></td>
+          <tr ng-repeat = "p in dc.pointsResponse.standing">
+            <td><center><a href="#/leaguedetails/:uniqId" ng-click="" >{{p.position}}</a></center></td>
+            <td><center><a href="#/leaguedetails/{{n.id}}" ng-click="" >{{p.teamName}}</a></center></td>
+            <td><img ng-src="{{p.crestURI}}" class="img-responsive" width="300" height="270"></td>
+            <td><center><a href="#/leaguedetails/:uniqId" ng-click="" >{{p.wins}}</a></center></td>
+            <td><center><a href="#/leaguedetails/:uniqId" ng-click="" >{{p.losses}}</a></center></td>
+            <td><center><a href="#/leaguedetails/:uniqId" ng-click="" >{{p.goals}}</a></center></td>
+            <td><center><a href="#/leaguedetails/:uniqId" ng-click="" >{{p.points}}</a></center></td>
           </tr>
           </tbody>
         </table>
