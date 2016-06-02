@@ -1,3 +1,31 @@
-<div class="container">
-  <h2>Team Players Page</h2>
+<div class="jumbotron">
+  <nav class="navbar navbar-inverse">
+    <h2><center> Squad Details </center></h2>
+
+</nav>
+<center> <a class = "btn  btn-danger" href="#/">Home</a></center> 
 </div>
+
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>Jersey</th>
+      <th>Name</th>
+      <th>Position</th>
+      <th>Nationality</th>
+      <th>D.O.B</th>
+      <th>Market Value</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="p in pc.getPlayers.players">
+      <td>{{p.jerseyNumber}}</td>
+      <td>{{p.name}}</td>
+      <td>{{p.position}}</td>
+      <td>{{p.nationality}}</td>
+      <td>{{p.dateOfBirth}}</td>
+      <td>{{p.marketValue}}</td>
+    </tr>
+  </tbody>
+</table>
