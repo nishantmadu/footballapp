@@ -15,10 +15,10 @@ angularApp.config(function ($routeProvider) {
   })
 
 
-.when ('/teamdetails/:uniqId', {
-  templateUrl: 'pages/teams.html',
-  controller: 'TeamsController',
-  controllerAs: 'tc'
+.when ('/playersdetails', {
+  templateUrl: 'pages/players.html',
+  controller: 'PlayersController',
+  controllerAs: 'pc'
 })
 //
 });
@@ -55,12 +55,20 @@ angularApp.controller("HomeController",['$resource','$filter', '$http','$q',func
 }]);
 
 
-angularApp.controller("DetailsController",['$filter','$routeParams','FootballService',function($filter,$routeParams,FootballService){
+angularApp.controller("DetailsController",['$filter','$routeParams','$location','$rootScope','FootballService','playerService',function($filter,$routeParams,$location,$rootScope,FootballService,playerService){
     var vm=this;
+
+      // console.log(data);
+      //   $rootScope.teamPlayer = data.href;
+      //   $location.url('/teamdetails');
+
 
     var id = $routeParams.uniqId;
     vm.detailsResponse = FootballService.getTeams(id);
     vm.pointsResponse = FootballService.getPoints(id);
+    vm.teamPlayers = function(data){
+      playerService.api = data;
+    }
 
     console.log(vm.detailsResponse);
     console.log(vm.pointsResponse);
@@ -68,10 +76,21 @@ angularApp.controller("DetailsController",['$filter','$routeParams','FootballSer
   }]);
 
 
-    angularApp.controller("TeamsController",['$resource','$filter','$routeParams',function($resource,$filter,$routeParams){
-      var id = $routeParams.uniqId;
-      vm.teamsResponse = FootballService.getTeamdetails(id);
+    angularApp.controller("PlayersController",['$resource','$filter','playerService',function($resource,$filter,playerService){
 
+      // var vm = this;
+      // var url = $rootScope.teamPlayer;
+      // function getTeamPlayers(){
+      //   vm.players = FootballService.getTeamdetails(url);
+      // }
+      // getTeamPlayers();
+
+      var vm = this;
+        vm.getApi =  playerService.api;
+        // vm.getFixt = $resource(vm.getApi+'/fixtures').get();
+        // console.log(vm.getFixt);
+        vm.getPlayers = $resource(vm.getApi+'/players').get();
+        console.log(vm.getPlayers);
 
 
 }]);
@@ -93,10 +112,20 @@ angularApp.service('FootballService', function($resource) {
       return vm.pointsResponse;
     }
 
-    vm.getTeamdetails = function(id) {
-      var teamDetails = $resource();
-      vm.teamsResponse = footballDetails.get();
+    vm.getTeamdetails = function(url) {
+      var teamDetails = $resource(url);
+      vm.teamsResponse = teamDetails.get();
       return vm.teamsResponse;
     }
 
+    // vm.playerDetails = function(){
+    //   var vm= this;
+    //   vm.api = '';
+    // }
+
+});
+
+angularApp.service('playerService',function(){
+var vm= this;
+vm.api = '';
 });

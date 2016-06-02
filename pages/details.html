@@ -13,17 +13,21 @@
             </thead>
             <tbody>
             <tr ng-repeat = "m in dc.detailsResponse.teams">
-              <th><img ng-src="{{m.crestUrl}}" class="img-responsive" width="240" height="270"></th>
-              <th><center><a href="#/teamdetails/{{m.id}}" ng-click="" >{{m.name}}</a></center></th>
-              <td><center><a href="#/teamdetails/:uniqId" ng-click="" >{{m.code}}</a></center></td>
-              <td><center><a href="#/teamdetails/:uniqId" ng-click="" >{{m.shortName}}</a></center></td>
-              <td><center><a href="#/teamdetails/:uniqId" ng-click="" >{{m.squadMarketValue}}</a></center></td>
+                <th><img ng-src="{{m.crestUrl}}" class="img-responsive" width="240" height="270"></th>
+                <td><a href="#/playersdetails" ng-click = dc.teamPlayers(m._links.self.href)>{{m.name}}</a></td>
+                <td><center>{{m.code}}</center></td>
+                <td><center>{{m.shortName}}</center></td>
+                <td><center>{{m.squadMarketValue}}</center></td>
             </tr>
             </tbody>
           </table>
         </div>
       </div>
     </li>
+
+
+
+
     <li class="active"><a href="#">Points Table</a>
       <div class ="row">
         <div class="col-md-5 col-md-offset-2" id="result">
