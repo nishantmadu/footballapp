@@ -87,8 +87,8 @@ angularApp.controller("DetailsController",['$filter','$routeParams','$location',
 
       var vm = this;
         vm.getApi =  playerService.api;
-        // vm.getFixt = $resource(vm.getApi+'/fixtures').get();
-        // console.log(vm.getFixt);
+         vm.getFixt = $resource(vm.getApi+'/fixtures').get();
+        console.log(vm.getFixt);
         vm.getPlayers = $resource(vm.getApi+'/players').get();
         console.log(vm.getPlayers);
 
